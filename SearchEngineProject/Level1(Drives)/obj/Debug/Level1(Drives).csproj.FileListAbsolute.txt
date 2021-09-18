@@ -1,0 +1,7 @@
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\obj\Debug\Level1(Drives).csproj.AssemblyReference.cache
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\obj\Debug\Level1(Drives).csproj.CoreCompileInputs.cache
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\bin\Debug\Level1(Drives).exe.config
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\bin\Debug\Level1(Drives).exe
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\bin\Debug\Level1(Drives).pdb
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\obj\Debug\Level1(Drives).exe
+C:\Users\g s khagta\Downloads\AssignmentCodes\Projects\Search Engine\SearchEngineProject\SearchEngineProject\Level1(Drives)\obj\Debug\Level1(Drives).pdb
