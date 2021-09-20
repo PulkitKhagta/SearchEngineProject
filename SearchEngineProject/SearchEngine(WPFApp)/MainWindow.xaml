@@ -12,7 +12,7 @@
         </Label>
         <StackPanel Orientation="Horizontal">
 
-            <TextBox x:Name="Filename" Margin="30 0 5 0" HorizontalAlignment="Left"  Height="32" VerticalAlignment="Top" Width="647" RenderTransformOrigin="0.5,0.5" Background="White">
+            <TextBox x:Name="Filename" FontSize ="16"  Margin="30 0 5 0" HorizontalAlignment="Left"  Height="32" VerticalAlignment="Center" Width="647" RenderTransformOrigin="0.5,0.5" Background="White">
                 <TextBox.Effect>
                     <DropShadowEffect BlurRadius="10" Color="#FF8F8F8F"/>
                 </TextBox.Effect>

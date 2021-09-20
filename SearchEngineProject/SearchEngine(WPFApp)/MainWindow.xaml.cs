@@ -63,8 +63,8 @@ namespace SearchEngine_WPFApp_
             }
 
             this.searcher.Filename = Filename.Text.ToLower();
-            
-            
+
+            lbDrives.Items.Clear();
             foreach (DriveInfo drvinfo in TotalDrives)
             {
                 if (drvinfo.IsReady == true)
