@@ -9,6 +9,25 @@ namespace SearchEngine_ConsoleApp_
 {
     class Program
     {
+        /*public string[] Histoy { get; set; }
+        private string term;
+
+        public string Term
+        {
+            get { return term; }
+            set { term = value; }
+
+
+        }
+
+        private string dir;
+
+        public string Dir
+        {
+            get { return dir; }
+            set { dir = value; }
+        }*/
+        static StreamWriter sw { get; set; }
         static void Main(string[] args)
         {
             //Level 1
@@ -31,6 +50,17 @@ namespace SearchEngine_ConsoleApp_
             string filename = Console.ReadLine();
             Console.WriteLine(filename);
 
+            string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+            path = Path.Combine(path, "SearchHistory.txt");
+            FileStream fileStream = null;
+            if (File.Exists(path))
+            {
+                fileStream = new FileStream(path, FileMode.Append, FileAccess.ReadWrite);
+            }
+            else
+            {
+                fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+            }
             //Level 2
             /*foreach (DriveInfo d in TotalDrives)
             {
@@ -40,7 +70,12 @@ namespace SearchEngine_ConsoleApp_
                     GetAllFiles(b, filename);
                 }
             }*/
-            //Dictionary<string, List<string>> filepaths = Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> filedict = new Dictionary<string, List<string>>();
+            //file read
+            if(!filedict.ContainsKey(filename))  
+                filedict.Add(filename, new List<string>());
+
+            sw = new StreamWriter(fileStream);
             //Level 3
             Parallel.ForEach(TotalDrives, d =>
             {
@@ -50,74 +85,67 @@ namespace SearchEngine_ConsoleApp_
                     GetAllFiles(b, filename);
                 }
             });
+            sw.Close();
+            sw.Dispose();
+            //file write
         Console.ReadLine();
         }
 
         //Function used in Level 2
         /*private static void GetAllFiles(string sDir, string filename)
         {
-            foreach(string dir in Directory.GetDirectories(sDir))
+            try
             {
-                try
+                List<string> allfiles_Folders = new List<string>();
+                allfiles_Folders.AddRange(Directory.GetFiles(sDir));
+                allfiles_Folders.AddRange(Directory.GetDirectories(sDir));
+                forEach(string s in allfiles_Folders)
                 {
-                    foreach (string file in Directory.GetFiles(dir, filename))
+                    string _s = s.ToLower();
+                    string _filename = filename.ToLower();
+                    if(Directory.Exists(s) && s!= "." && s != "..")
                     {
-                        string filePath = Path.GetFullPath(file);
-                        Console.WriteLine(filePath);
+                        GetAllFiles(s, filename);
                     }
-                    //Recursive Search
-                    GetAllFiles(dir, filename);
-                }
-                catch
-                {
-                    
+                    if (_s.Contains(_filename))
+                    {
+                        Console.WriteLine(s);
+                    }
                 }
             }
-        }*/
-
-        //Function for Level 3 
-        /*private static void GetAllFiles(string sDir, string filename)
-        {
-            Parallel.ForEach(Directory.GetDirectories(sDir), dir =>
+            catch
             {
-                try
-                {
-                    foreach (string file in Directory.GetFiles(dir, filename.Contains(".*") ? filename : filename+".*"))
-                    {
-                        string filePath = Path.GetFullPath(file);
-                        Console.WriteLine(filePath);
-                    }
-                    //Recursive Search
-                    GetAllFiles(dir, filename);
-                }
-                catch(Exception ex)
-                {
-                    //Console.WriteLine(ex.Message);
-                }
-            });
-        }*/
 
+            }
+        }*/
         private static void GetAllFiles(string sDir, string filename)
         {
-            Parallel.ForEach(Directory.GetDirectories(sDir), dir =>
+            try
             {
-                try
+                List<string> allfiles_Folders = new List<string>();
+                allfiles_Folders.AddRange(Directory.GetFiles(sDir));
+                allfiles_Folders.AddRange(Directory.GetDirectories(sDir));
+                Parallel.ForEach(allfiles_Folders, s =>
                 {
-                    Parallel.ForEach(Directory.GetFiles(dir, filename.Contains(".*") ? filename : filename + ".*"), file =>
+                    string _s = s.ToLower();
+                    string _filename = filename.ToLower();
+                    if(Directory.Exists(s) && s!= "." && s != "..")
                     {
-                        string filePath = Path.GetFullPath(file);
-                        Console.WriteLine(filePath);
-                        //filepaths.Add(filePath);
-                    });
-                    
-                    //Recursive Search
-                    GetAllFiles(dir, filename);
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ex.Message);
-                }
-            });
+                        GetAllFiles(s, filename);
+                    }
+                    if (_s.Contains(_filename))
+                    {
+                        Console.WriteLine(s);
+                        sw.WriteLine(s);
+                    }
+                });
+            }
+            catch
+            {
+
+            }
         }
+
+       
     }
 }
