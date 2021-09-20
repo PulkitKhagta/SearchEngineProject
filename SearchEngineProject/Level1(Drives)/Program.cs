@@ -32,18 +32,29 @@ namespace SearchEngine_ConsoleApp_
             Console.WriteLine(filename);
 
             //Level 2
-            foreach (DriveInfo d in TotalDrives)
+            /*foreach (DriveInfo d in TotalDrives)
             {
                 if(d.IsReady == true)
                 {
                     string b = d.Name.ToString();
                     GetAllFiles(b, filename);
                 }
-            }
+            }*/
+            //Dictionary<string, List<string>> filepaths = Dictionary<string, List<string>>();
+            //Level 3
+            Parallel.ForEach(TotalDrives, d =>
+            {
+                if (d.IsReady == true)
+                {
+                    string b = d.Name.ToString();
+                    GetAllFiles(b, filename);
+                }
+            });
         Console.ReadLine();
         }
-        
-        private static void GetAllFiles(string sDir, string filename)
+
+        //Function used in Level 2
+        /*private static void GetAllFiles(string sDir, string filename)
         {
             foreach(string dir in Directory.GetDirectories(sDir))
             {
@@ -62,6 +73,51 @@ namespace SearchEngine_ConsoleApp_
                     
                 }
             }
+        }*/
+
+        //Function for Level 3 
+        /*private static void GetAllFiles(string sDir, string filename)
+        {
+            Parallel.ForEach(Directory.GetDirectories(sDir), dir =>
+            {
+                try
+                {
+                    foreach (string file in Directory.GetFiles(dir, filename.Contains(".*") ? filename : filename+".*"))
+                    {
+                        string filePath = Path.GetFullPath(file);
+                        Console.WriteLine(filePath);
+                    }
+                    //Recursive Search
+                    GetAllFiles(dir, filename);
+                }
+                catch(Exception ex)
+                {
+                    //Console.WriteLine(ex.Message);
+                }
+            });
+        }*/
+
+        private static void GetAllFiles(string sDir, string filename)
+        {
+            Parallel.ForEach(Directory.GetDirectories(sDir), dir =>
+            {
+                try
+                {
+                    Parallel.ForEach(Directory.GetFiles(dir, filename.Contains(".*") ? filename : filename + ".*"), file =>
+                    {
+                        string filePath = Path.GetFullPath(file);
+                        Console.WriteLine(filePath);
+                        //filepaths.Add(filePath);
+                    });
+                    
+                    //Recursive Search
+                    GetAllFiles(dir, filename);
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine(ex.Message);
+                }
+            });
         }
     }
 }
