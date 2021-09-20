@@ -13,7 +13,7 @@ namespace SearchEngine_WPFApp_
     {
         private string dir;
         private string name;
-        public List<string> History { get; set; }
+        public string[] History { get; set; }
 
         public event FileFound OnFileFound;
         public FileSearcher(string dir, string filename)
@@ -85,7 +85,7 @@ namespace SearchEngine_WPFApp_
         public void WriteHistory()
         {
 
-            string path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             string filename = @"history.txt";
             if (File.Exists(Path.Combine(path, filename)))
             {
@@ -115,12 +115,12 @@ namespace SearchEngine_WPFApp_
 
         public void ReadHistory()
         {
-            string path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             string filename = @"history.txt";
             if (File.Exists(Path.Combine(path, filename)))
             {
                 var lineCount = File.ReadLines(Path.Combine(path, filename));
-                History.AddRange(lineCount);
+                History = lineCount.ToArray();
 
             }
 

@@ -48,6 +48,15 @@ namespace SearchEngine_WPFApp_
 
         private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
         {
+            if (lbFileFound.Items.Count == 0)
+            {
+                MessageBox.Show("Not Found !!");
+                lbFileFound.Items.CopyTo(searcher.History, 0);
+                return;
+            }
+            searcher.History = new string[lbFileFound.Items.Count];
+            lbFileFound.Items.CopyTo(searcher.History, 0);
+            searcher.WriteHistory();
             MessageBox.Show("Done!");
         }
 
