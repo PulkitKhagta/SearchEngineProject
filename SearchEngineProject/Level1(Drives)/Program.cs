@@ -27,9 +27,41 @@ namespace SearchEngine_ConsoleApp_
                 c++;
             }
             Console.WriteLine("Total no of Drives=" + c);
+            Console.WriteLine("Enter the filename");
             string filename = Console.ReadLine();
             Console.WriteLine(filename);
-            Console.ReadLine();
+
+            //Level 2
+            foreach (DriveInfo d in TotalDrives)
+            {
+                if(d.IsReady == true)
+                {
+                    string b = d.Name.ToString();
+                    GetAllFiles(b, filename);
+                }
+            }
+        Console.ReadLine();
+        }
+        
+        private static void GetAllFiles(string sDir, string filename)
+        {
+            foreach(string dir in Directory.GetDirectories(sDir))
+            {
+                try
+                {
+                    foreach (string file in Directory.GetFiles(dir, filename))
+                    {
+                        string filePath = Path.GetFullPath(file);
+                        Console.WriteLine(filePath);
+                    }
+                    //Recursive Search
+                    GetAllFiles(dir, filename);
+                }
+                catch
+                {
+                    
+                }
+            }
         }
     }
 }
