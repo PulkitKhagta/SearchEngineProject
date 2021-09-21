@@ -1,0 +1,5 @@
+C:\folder\Lab9file.txt
+C:\$Recycle.Bin\S-1-5-21-714855206-2692228062-2888992553-1001\$R16LS33\Lab9file.txt
+C:\Users\g s khagta\Downloads\AssignmentCodes\.NetPrograms\FileIOandSerializationLabs\Lab9\folder\Lab9file.txt
+C:\Users\g s khagta\AppData\Roaming\Microsoft\Windows\Recent\Lab9file.txt.lnk
+C:\$Recycle.Bin\S-1-5-21-714855206-2692228062-2888992553-1001\$RXGHWAW\Lab9file.txt

@@ -116,7 +116,7 @@ namespace SearchEngine_WPFApp_
         public void ReadHistory()
         {
             string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
-            string filename = @"history.txt";
+            string filename = @"SearchHistory.txt";
             if (File.Exists(Path.Combine(path, filename)))
             {
                 var lineCount = File.ReadLines(Path.Combine(path, filename));
