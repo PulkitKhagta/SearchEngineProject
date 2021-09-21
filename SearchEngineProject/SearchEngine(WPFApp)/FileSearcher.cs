@@ -86,7 +86,7 @@ namespace SearchEngine_WPFApp_
         {
 
             string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
-            string filename = @"history.txt";
+            string filename = @"SearchHistory.txt";
             if (File.Exists(Path.Combine(path, filename)))
             {
                 File.Delete(Path.Combine(path, filename));
